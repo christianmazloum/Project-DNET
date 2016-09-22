@@ -12,6 +12,9 @@ namespace MyWCFLib
     public interface IService1
     {
         [OperationContract]
+        List<Category> GetAllCategory();
+
+        [OperationContract]
         ProductModel GetProduct(int id);
 
         [OperationContract]

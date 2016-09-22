@@ -15,7 +15,6 @@ namespace WpfApp
 
         public MyViewModel()
         {
-            action();
             MyCommand = new RelayCommand(action, canExecute);
             this.ValueLabel = "Hello Label";
         }

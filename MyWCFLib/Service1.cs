@@ -24,6 +24,24 @@ namespace MyWCFLib
             return category.CategoryId;
         }
 
+        public List<Category> GetAllCategory()
+        {
+
+            List<Category> _categories = new List<Category>();
+            using (ModelContainer context = new ModelContainer())
+            {
+                List<Category> categories = context.CategorySet.ToList<Category>();
+                foreach (Category category in categories)
+                {
+                    Category tmp = new Category();
+                    tmp.Name = category.Name;
+                    _categories.Add(tmp);
+                }                
+            }
+            return _categories;
+        }
+    
+
         public int CreateProduct(ProductModel model)
         {
             Product product = new Product();
