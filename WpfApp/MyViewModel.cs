@@ -6,13 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WpfApp.AppService;
 
 namespace WpfApp
 {
     public class MyViewModel : ViewModelBase
-    {
+    {        
+
         public MyViewModel()
         {
+            action();
             MyCommand = new RelayCommand(action, canExecute);
             this.ValueLabel = "Hello Label";
         }
@@ -41,7 +44,16 @@ namespace WpfApp
 
         private void action()
         {
-            this.ValueLabel = " Clicked";
+            Service1Client client = new Service1Client();
+
+            //ProductModel product = new ProductModel();
+            //product.Name = 
+
+            int id = 4;
+
+            ProductModel category = client.GetProduct(id);
+
+            this.ValueLabel = (category.Name);
         }
 
         private bool canExecute()

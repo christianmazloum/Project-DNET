@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWCFLib", "MyWCFLib\MyWCFLib.csproj", "{FE90DD72-17C8-480D-AC05-423983860156}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{1FE2A666-81BF-45EE-AA37-4664E2B197A7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FE90DD72-17C8-480D-AC05-423983860156} = {FE90DD72-17C8-480D-AC05-423983860156}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
