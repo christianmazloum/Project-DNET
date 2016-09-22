@@ -10,22 +10,56 @@ namespace MyWCFLib
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class Service1 : IService1
     {
-        public string GetData(int value)
+        public int CreateCategory(CategoryModel model)
         {
-            return string.Format("You entered: {0}", value);
+            Category category = new Category();
+            using (ModelContainer context = new ModelContainer())
+            {
+                category.Name = model.Name;
+
+                context.CategorySet.Add(category);
+                context.SaveChanges();
+
+            }
+            return category.CategoryId;
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public int CreateProduct(ProductModel model)
         {
-            if (composite == null)
+            Product product = new Product();
+            using (ModelContainer context = new ModelContainer())
             {
-                throw new ArgumentNullException("composite");
+                product.Name = model.Name;
+                product.Detail = model.Detail;
+                product.Price = model.Price;
+                product.Stock = model.Stock;
+                product.Sold = model.Sold;
+                product.Restock = model.Restock;
+                product.CategoryCategoryId = model.CategoryCategoryId;
+
+                context.ProductSet.Add(product);
+                context.SaveChanges();
             }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            return product.ProductId;
         }
+
+        public ProductModel GetProduct(int id)
+        {
+            ProductModel product = new ProductModel();
+            using (ModelContainer context = new ModelContainer())
+            {
+                var tmp = context.ProductSet.Where(p => p.ProductId == id).First();
+
+                product.Name = tmp.Name;
+                product.Detail = tmp.Detail;
+                product.Price = tmp.Price;
+                product.Stock = tmp.Stock;
+                product.Sold = tmp.Sold;
+                product.Restock = tmp.Restock;
+                product.CategoryCategoryId = tmp.CategoryCategoryId;
+            }
+            return product;
+        }
+
     }
 }
